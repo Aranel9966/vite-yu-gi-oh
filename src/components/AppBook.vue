@@ -21,13 +21,20 @@ export default{
         });
     },
     methods: {
-        search() {
+        serch() {
             let apiNewString =this.store.apiLink
-            console.log( apiNewString += `&+type=${this.store.serchType}`)
-            apiNewString += `&+type=${this.store.serchType}&fname=${this.store.searchName}`
+
+            if(this.store.serchType==""){
+                apiNewString += `&+fname=${this.store.serchName}`
+                
+            }else if(this.store.serchName==''){
+                apiNewString += `&+type=${this.store.serchType}`
+            }else{
+                apiNewString += `&type=${this.store.serchType}&fname=${this.store.serchName}`
+            }
             axios.get(apiNewString).then((res) => {
-            this.store.cards = res.data.data;
-        });
+            this.store.cards = res.data.data;   
+            });
         }
     },
     components: { AppHeader }
@@ -35,7 +42,7 @@ export default{
 </script>
 <template>
     
-    <AppHeader @searchCard="search()"></AppHeader>
+    <AppHeader @serchCard="serch()"></AppHeader>
     
     <div class="card-list">
 

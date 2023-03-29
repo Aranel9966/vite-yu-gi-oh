@@ -10,7 +10,6 @@ export default{
   },
   components:{
     AppBook,
-    // AppHeader
   }
   
 }
@@ -18,7 +17,6 @@ export default{
 
 <template>
   <div>
-    <!-- <AppHeader></AppHeader> -->
     <AppBook></AppBook>
     
   </div>

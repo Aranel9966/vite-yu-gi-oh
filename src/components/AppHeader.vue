@@ -6,7 +6,7 @@ export default{
   data(){
     return{
       store,
-    //   searchName:'',
+    
 
     }
   },
@@ -20,14 +20,14 @@ export default{
     <div class="top">
         <h1>YU-GI-OH</h1>
         
-        <input v-model="store.searchName" type="text" placeholder="Cerca per nome">
+        <input v-model="store.serchName" type="text" placeholder="Cerca per nome">
         <select name="type" id="type" v-model="store.serchType">
             <option value=""></option>
             <option value="Spell Card">Magie</option>
             <option value="Trap Card">Trappole</option>
             <option value="Normal Monster">mostri</option>
         </select>
-        <button @click="$emit('searchCard')"  >Cerca</button>
+        <button @click="$emit('serchCard')"  >Cerca</button>
 
     </div>
     
@@ -37,5 +37,8 @@ export default{
 <style scoped>
     .top{
         text-align: center;
+    }
+    #type{
+        margin: 10px;
     }
 </style>
