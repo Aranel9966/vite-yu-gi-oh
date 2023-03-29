@@ -2,12 +2,12 @@
 import { store } from '../store';
 import axios from 'axios';
 import AppHeader from './AppHeader.vue';
-// import * as bootstrap from 'bootstrap'
 export default{
     name: "AppBook",
     data() {
         return {
             store,
+            visible:false
         };
     },
     components:{
@@ -23,7 +23,7 @@ export default{
     methods: {
         serch() {
             let apiNewString =this.store.apiLink
-
+            
             if(this.store.serchType==""){
                 apiNewString += `&+fname=${this.store.serchName}`
                 
@@ -33,8 +33,18 @@ export default{
                 apiNewString += `&type=${this.store.serchType}&fname=${this.store.serchName}`
             }
             axios.get(apiNewString).then((res) => {
-            this.store.cards = res.data.data;   
+                
+                this.store.cards = res.data.data;   
+                
             });
+
+        },
+        effect(){
+            if(this.visible==true){
+                this.visible=false
+            }else{
+                this.visible=true
+            }
         }
     },
     components: { AppHeader }
@@ -46,13 +56,14 @@ export default{
     
     <div class="card-list">
 
-        <div v-if="store.cards.length"  v-for="card in store.cards"  class="card">
+        <div @click="effect(index)" v-if="store.cards.length"  v-for="(card,index) in store.cards"  class="card">
             <img :src="card.card_images[0].image_url" alt="">
+            <div :class="this.visible==false?'no-display':'display'" >
+                {{ card.desc }}
+            </div>
         </div>
         <div v-else>
-            <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
+            <span>Loading...</span>
         </div>
                 
     </div>
@@ -65,11 +76,23 @@ export default{
         justify-content: center;
         gap: 20px;
     }
+    .card img:hover{
+        cursor: pointer;
+    }
     .card img{
         display: flex;
         flex-flow: row wrap;
         height: 150px;
         object-fit: cover;
         margin: 10px;
+    }
+    .display{
+        font-size: x-small;
+        width: 120px;
+        height: 80px;
+        overflow-y: auto;
+    }
+    .no-display{
+        display: none;
     }
 </style>
