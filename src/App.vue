@@ -1,6 +1,7 @@
 <script>
 import {store} from "./store.js"
 import AppBook from "./components/AppBook.vue";
+import AppHeader from "./components/AppHeader.vue";
 export default{
   data(){
     return{
@@ -8,7 +9,8 @@ export default{
     }
   },
   components:{
-    AppBook
+    AppBook,
+    // AppHeader
   }
   
 }
@@ -16,6 +18,7 @@ export default{
 
 <template>
   <div>
+    <!-- <AppHeader></AppHeader> -->
     <AppBook></AppBook>
     
   </div>
